@@ -1,0 +1,24 @@
+service: alexa-skill
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: us-east-2
+  stage: ${opt:stage, 'dev'}
+  role: ${ssm:/cssapps/server/role}
+
+functions:
+  emergencyHandler:
+    handler: index.emergencyHandler
+    events:
+      - alexaSkill: ${ssm:/cssapps/function/urgent}
+  helloHandler:
+    handler: index.helloHandler
+    events:
+      - alexaSkill: ${ssm:/cssapps/function/openai}
+      - http:
+          path: mutebot/hello
+          method: get
+
+plugins:
+  - serverless-offline
