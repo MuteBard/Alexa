@@ -11,11 +11,11 @@ functions:
   emergencyHandler:
     handler: index.emergencyHandler
     events:
-      - alexaSkill: ${ssm:/cssapps/function/urgent}
+      - alexaSkill: ${ssm:/cssapps/alexa/emergency}
   helloHandler:
     handler: index.helloHandler
     events:
-      - alexaSkill: ${ssm:/cssapps/function/openai}
+      - alexaSkill: ${ssm:/cssapps/alexa/general}
       - http:
           path: mutebot/hello
           method: get
